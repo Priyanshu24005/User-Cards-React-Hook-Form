@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <div className='flex flex-col h-screen bg-gray-100 p-4 gap-4'>
-      <Navbar setToggle={setToggle}/>
+      <Navbar setToggle={setToggle} setUpdatedData={setUpdatedData}/>
       {toggle?<div className='flex gap-6 flex-wrap'>  
       {user.map((e,index)=> {
         return <UserCard setUpdatedData={setUpdatedData} ind={index} user={e} key={index} setToggle={setToggle} handleDelete={handleDelete}/>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserCard = ({user}) => {
+const UserCard = ({user,setToggle , handleDelete ,ind ,setUpdatedData}) => {
   return (
     <div className='w-72 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200'>
       <img
@@ -25,11 +25,14 @@ const UserCard = ({user}) => {
         </div>
 
         <div className='flex justify-between mt-5'>
-          <button className='bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition cursor-pointer'>
+          <button className='bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition cursor-pointer' onClick={() => {
+            setUpdatedData(user);
+            setToggle((prev) => !prev);
+          }}>
             Update
           </button>
 
-          <button className='bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition cursor-pointer'>
+          <button className='bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition cursor-pointer' onClick={() => handleDelete(ind)}>
             Delete
           </button>
         </div>

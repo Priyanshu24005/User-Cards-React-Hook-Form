@@ -1,25 +1,39 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
 
-const Form = ({ setUser, setToggle }) => {
+const Form = ({ setUser, setToggle, user, updatedData }) => {
   let {
     register,
+    handleSubmit,
     reset,
     formState: { errors },
-    handleSubmit,
   } = useForm({
     mode: "onChange",
+    defaultValues: updatedData,
   });
 
   let handleClick = (data) => {
-    setUser((prev) => [...prev, data]);
+    if (updatedData) {
+      setUser((prev) => {
+        return prev.map((val) => {
+          return val.id === updatedData.id ? { ...data } : val;
+        });
+      });
+    } else {
+      let arr = [...user, {...data,id:nanoid()}];
+      setUser(arr);
+      localStorage.setItem("user", JSON.stringify(arr));
+    }
+
     setToggle((prev) => !prev);
+
     reset();
   };
 
   return (
     <div className="min-h-[85vh] flex justify-center items-center bg-gray-100">
-      <div className="bg-white w-[420px] rounded-2xl shadow-xl p-8">
+      <div className="bg-white w-105 rounded-2xl shadow-xl p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Create User
         </h1>
@@ -38,9 +52,7 @@ const Form = ({ setUser, setToggle }) => {
               className="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.name.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
             )}
           </div>
 

@@ -10,9 +10,6 @@ const App = () => {
   });
 
   const [updatedData, setUpdatedData] = useState(null);
-
-  
-  
   
   const [toggle, setToggle] = useState(false);
 
